@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenario B: Alta Concorrencia (50 threads)",
+  "pool": "Oracle UCP",
+  "totalRequests": 10000,
+  "errors": 0,
+  "throughput": 3052.587418900334,
+  "avgMs": 16.3373787722,
+  "p50Ms": 16.199083,
+  "p95Ms": 22.404125,
+  "p99Ms": 29.271334,
+  "wallClockSeconds": 3.275909459
+}

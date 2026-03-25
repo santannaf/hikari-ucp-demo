@@ -1,0 +1,17 @@
+{
+  "scenario": "Cenario F: Queda Total + Recuperacao",
+  "pool": "Oracle UCP",
+  "totalRequests": 1000,
+  "errors": 10,
+  "throughput": 8441.50773769703,
+  "avgMs": 2.34078237,
+  "p50Ms": 2.279875,
+  "p95Ms": 3.418708,
+  "p99Ms": 4.096959,
+  "wallClockSeconds": 0.11846225,
+  "recoveryTimeMs": 49.668916,
+  "baselineP50Ms": 2.279875,
+  "baselineP99Ms": 4.096959,
+  "postRecoveryP50Ms": 2.840542,
+  "postRecoveryP99Ms": 17.258625
+}

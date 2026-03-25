@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenário A: Leitura Simples (GET /posts/{id})",
+  "pool": "HikariCP",
+  "totalRequests": 5000,
+  "errors": 0,
+  "throughput": 4072.5572235891086,
+  "avgMs": 4.830720100200001,
+  "p50Ms": 4.356375,
+  "p95Ms": 8.415333,
+  "p99Ms": 12.351584,
+  "wallClockSeconds": 1.227729833
+}

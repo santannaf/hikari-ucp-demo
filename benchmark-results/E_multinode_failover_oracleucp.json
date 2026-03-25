@@ -1,0 +1,17 @@
+{
+  "scenario": "Cenario E: Failover Multi-Node",
+  "pool": "Oracle UCP",
+  "totalRequests": 1000,
+  "errors": 0,
+  "throughput": 4701.350627044755,
+  "avgMs": 2.735768739,
+  "p50Ms": 2.398375,
+  "p95Ms": 3.318292,
+  "p99Ms": 4.71075,
+  "wallClockSeconds": 0.212704833,
+  "recoveryTimeMs": 3.851708,
+  "baselineP50Ms": 2.398375,
+  "baselineP99Ms": 4.71075,
+  "postRecoveryP50Ms": 2.809833,
+  "postRecoveryP99Ms": 14.66075
+}

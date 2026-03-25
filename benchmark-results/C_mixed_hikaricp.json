@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenario C: Workload Mista (70% read / 30% write)",
+  "pool": "HikariCP",
+  "totalRequests": 8000,
+  "errors": 0,
+  "throughput": 4987.419104389426,
+  "avgMs": 9.98372916575,
+  "p50Ms": 8.741042,
+  "p95Ms": 16.838709,
+  "p99Ms": 24.817875,
+  "wallClockSeconds": 1.604036042
+}

@@ -1,0 +1,17 @@
+{
+  "scenario": "Cenario D: Failover e Recuperacao",
+  "pool": "HikariCP",
+  "totalRequests": 1000,
+  "errors": 10,
+  "throughput": 13011.367055543898,
+  "avgMs": 1.4978416350000001,
+  "p50Ms": 1.378291,
+  "p95Ms": 2.599125,
+  "p99Ms": 3.6475,
+  "wallClockSeconds": 0.076855875,
+  "recoveryTimeMs": 66.789208,
+  "baselineP50Ms": 1.378291,
+  "baselineP99Ms": 3.6475,
+  "postRecoveryP50Ms": 2.11925,
+  "postRecoveryP99Ms": 11.320208
+}

@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenario B: Alta Concorrencia (50 threads)",
+  "pool": "HikariCP",
+  "totalRequests": 10000,
+  "errors": 0,
+  "throughput": 4220.318565471516,
+  "avgMs": 11.8070357164,
+  "p50Ms": 11.110291,
+  "p95Ms": 18.757542,
+  "p99Ms": 22.933833,
+  "wallClockSeconds": 2.369489375
+}

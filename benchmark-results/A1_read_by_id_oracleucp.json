@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenário A: Leitura Simples (GET /posts/{id})",
+  "pool": "Oracle UCP",
+  "totalRequests": 5000,
+  "errors": 0,
+  "throughput": 3142.175342519045,
+  "avgMs": 6.303050655,
+  "p50Ms": 5.846916,
+  "p95Ms": 10.182,
+  "p99Ms": 15.045458,
+  "wallClockSeconds": 1.591254292
+}

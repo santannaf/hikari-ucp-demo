@@ -1,0 +1,55 @@
+name: env-oracle-23ai
+services:
+  oracle-node1:
+    image: gvenzl/oracle-free:23-slim
+    container_name: oracle-node1
+    hostname: oracle-node1
+    ports:
+      - "1521:1521"
+    environment:
+      TZ: America/Sao_Paulo
+      ORACLE_PASSWORD: adm
+      APP_USER: TEMPLATEBANKING_ADM
+      APP_USER_PASSWORD: adm
+    volumes:
+      - oracle23ai_node1_data:/opt/oracle/oradata
+      - ./oracle-database:/container-entrypoint-initdb.d
+    deploy:
+      resources:
+        limits:
+          cpus: "5"
+          memory: "4G"
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+
+  oracle-node2:
+    image: gvenzl/oracle-free:23-slim
+    container_name: oracle-node2
+    hostname: oracle-node2
+    ports:
+      - "1522:1521"
+    environment:
+      TZ: America/Sao_Paulo
+      ORACLE_PASSWORD: adm
+      APP_USER: TEMPLATEBANKING_ADM
+      APP_USER_PASSWORD: adm
+    volumes:
+      - oracle23ai_node2_data:/opt/oracle/oradata
+      - ./oracle-database:/container-entrypoint-initdb.d
+    deploy:
+      resources:
+        limits:
+          cpus: "5"
+          memory: "4G"
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+
+volumes:
+  oracle23ai_node1_data:
+  oracle23ai_node2_data:

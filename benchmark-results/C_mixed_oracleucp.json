@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenario C: Workload Mista (70% read / 30% write)",
+  "pool": "Oracle UCP",
+  "totalRequests": 8000,
+  "errors": 0,
+  "throughput": 4560.836788994327,
+  "avgMs": 10.916073681125,
+  "p50Ms": 10.705917,
+  "p95Ms": 15.786625,
+  "p99Ms": 22.730208,
+  "wallClockSeconds": 1.754064083
+}

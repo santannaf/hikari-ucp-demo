@@ -1,0 +1,17 @@
+{
+  "scenario": "Cenario D: Failover e Recuperacao",
+  "pool": "Oracle UCP",
+  "totalRequests": 1000,
+  "errors": 10,
+  "throughput": 8759.622785064776,
+  "avgMs": 2.256101927,
+  "p50Ms": 2.195916,
+  "p95Ms": 3.160542,
+  "p99Ms": 4.273209,
+  "wallClockSeconds": 0.114160167,
+  "recoveryTimeMs": 77.284292,
+  "baselineP50Ms": 2.195916,
+  "baselineP99Ms": 4.273209,
+  "postRecoveryP50Ms": 3.418208,
+  "postRecoveryP99Ms": 15.922083
+}

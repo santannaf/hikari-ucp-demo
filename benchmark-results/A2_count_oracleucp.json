@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenario A: Count Simples (GET /posts/count)",
+  "pool": "Oracle UCP",
+  "totalRequests": 3000,
+  "errors": 0,
+  "throughput": 5193.6109610619205,
+  "avgMs": 3.817322783333333,
+  "p50Ms": 3.578583,
+  "p95Ms": 6.282791,
+  "p99Ms": 9.868833,
+  "wallClockSeconds": 0.577632792
+}

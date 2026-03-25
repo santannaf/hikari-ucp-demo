@@ -1,0 +1,17 @@
+{
+  "scenario": "Cenario E: Failover Multi-Node",
+  "pool": "HikariCP",
+  "totalRequests": 1000,
+  "errors": 0,
+  "throughput": 11904.531608763522,
+  "avgMs": 1.660203669,
+  "p50Ms": 1.55975,
+  "p95Ms": 2.642291,
+  "p99Ms": 3.721916,
+  "wallClockSeconds": 0.084001625,
+  "recoveryTimeMs": 3.994584,
+  "baselineP50Ms": 1.55975,
+  "baselineP99Ms": 3.721916,
+  "postRecoveryP50Ms": 2.202042,
+  "postRecoveryP99Ms": 10.174417
+}

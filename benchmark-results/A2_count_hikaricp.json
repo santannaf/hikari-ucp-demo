@@ -1,0 +1,12 @@
+{
+  "scenario": "Cenario A: Count Simples (GET /posts/count)",
+  "pool": "HikariCP",
+  "totalRequests": 3000,
+  "errors": 0,
+  "throughput": 7506.015771400146,
+  "avgMs": 2.5147100943333336,
+  "p50Ms": 2.2165,
+  "p95Ms": 4.571042,
+  "p99Ms": 9.113334,
+  "wallClockSeconds": 0.399679416
+}

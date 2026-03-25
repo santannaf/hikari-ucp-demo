@@ -1,0 +1,89 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.0.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.graalvm.buildtools.native' version '0.11.5'
+}
+
+group = 'santannaf.oracle.demo'
+version = '0.0.1'
+description = 'hikari-ucp-demo'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+    // Connection Pools
+    implementation 'com.oracle.database.jdbc:ucp11'
+
+    // Oracle JDBC
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+
+    // Micrometer Prometheus (metrics endpoint)
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jdbc-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform {
+        excludeTags 'benchmark'
+    }
+}
+
+// Benchmark tasks — run with: ./gradlew benchmarkHikari or ./gradlew benchmarkUcp
+['Hikari', 'Ucp'].each { pool ->
+    tasks.register("benchmark${pool}", Test) {
+        group = 'benchmark'
+        description = "Run benchmark scenarios with ${pool} connection pool"
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+        useJUnitPlatform {
+            includeTags 'benchmark'
+        }
+        systemProperty 'spring.profiles.active', pool.toLowerCase()
+        testLogging {
+            events 'passed', 'failed', 'skipped'
+            showStandardStreams = true
+        }
+        outputs.upToDateWhen { false }
+
+        def logFile = file("benchmark-${pool.toLowerCase()}.log")
+        doFirst {
+            logFile.text = '' // limpa log anterior
+        }
+        onOutput { descriptor, event ->
+            logFile.append(event.message)
+        }
+        finalizedBy 'benchmarkReport'
+    }
+}
+
+// Disable Spring AOT for tests (benchmark project, no need for AOT processing)
+tasks.named('processTestAot') { enabled = false }
+
+// Generate comparative HTML report from saved results
+// Run: ./gradlew benchmarkReport
+tasks.register('benchmarkReport', JavaExec) {
+    group = 'benchmark'
+    description = 'Generate comparative HTML report (Chart.js) from benchmark results'
+    dependsOn 'testClasses'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'santannaf.oracle.demo.benchmark.ReportGenerator'
+    outputs.upToDateWhen { false }
+}

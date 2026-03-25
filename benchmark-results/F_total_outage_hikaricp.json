@@ -1,0 +1,17 @@
+{
+  "scenario": "Cenario F: Queda Total + Recuperacao",
+  "pool": "HikariCP",
+  "totalRequests": 1000,
+  "errors": 10,
+  "throughput": 10620.864739761411,
+  "avgMs": 1.836489273,
+  "p50Ms": 1.529375,
+  "p95Ms": 3.65875,
+  "p99Ms": 10.304,
+  "wallClockSeconds": 0.094154292,
+  "recoveryTimeMs": 65.368209,
+  "baselineP50Ms": 1.529375,
+  "baselineP99Ms": 10.304,
+  "postRecoveryP50Ms": 1.962084,
+  "postRecoveryP99Ms": 12.768458
+}

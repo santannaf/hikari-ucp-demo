@@ -32,11 +32,8 @@ class UcpReadTimeoutConfig {
                         var props = new Properties();
                         props.setProperty("oracle.jdbc.ReadTimeout", "3000");
                         props.setProperty("oracle.net.READ_TIMEOUT", "3");
+                        props.setProperty("oracle.jdbc.enableACSupport", "false");
                         pds.setConnectionProperties(props);
-
-                        // Desabilita Application Continuity no connection factory,
-                        // antes que o pool crie as conexoes iniciais.
-                        pds.setConnectionFactoryProperty("oracle.jdbc.enableACSupport", "false");
                     } catch (SQLException e) {
                         throw new RuntimeException("Falha ao configurar ReadTimeout no UCP", e);
                     }

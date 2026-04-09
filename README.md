@@ -155,9 +155,7 @@ Em operacoes de escrita (INSERT/UPDATE/DELETE), isso nao acontece porque elas ro
 
 Duas mudancas no `UcpReadTimeoutConfig`:
 
-1. **`postProcessAfterInitialization` → `postProcessBeforeInitialization`** — configura as propriedades **antes** do pool inicializar e criar as conexoes iniciais. Com `postProcessAfterInitialization`, as conexoes ja existiam com AC habilitado e a propriedade nao tinha efeito.
-
-2. **`setConnectionFactoryProperty("oracle.jdbc.enableACSupport", "false")`** em vez de colocar no `setConnectionProperties` — isso garante que a propriedade e setada diretamente no `OracleDataSource` (connection factory), que e quem efetivamente cria as conexoes fisicas com o Oracle. O `setConnectionProperties` seta propriedades no nivel do pool UCP, que pode nao propagar para o driver JDBC.
+**`postProcessAfterInitialization` → `postProcessBeforeInitialization`** — configura as propriedades **antes** do pool inicializar e criar as conexoes iniciais. Com `postProcessAfterInitialization`, o pool ja havia criado as conexoes iniciais (`initial-pool-size=10`) com AC habilitado, e setar a propriedade depois nao tinha efeito sobre essas conexoes ja existentes. Com `postProcessBeforeInitialization`, as connection properties (incluindo `oracle.jdbc.enableACSupport=false`) sao aplicadas antes do pool abrir qualquer conexao fisica.
 
 ## Como Executar
 

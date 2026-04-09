@@ -136,6 +136,29 @@ Para ambos os nodes, reinicia apenas o **node2** e mede a recuperacao operando c
 
 **Em producao com Oracle RAC + ONS real**, o UCP teria vantagem ainda maior com FAN events, Application Continuity e Runtime Load Balancing — features nao disponíveis no setup de teste com Oracle Free.
 
+## Fix: ORA-17381 - Replay disabled after endRequest
+
+O warning `Replay failed in method setNetWorkTimeout, error code: 381, reason: java.sql.SQLException: ORA-17381: Replay disabled after endRequest was called` aparece em aplicacoes REST que executam queries SELECT, mas nao em aplicacoes async que fazem somente INSERT/UPDATE/DELETE.
+
+### Causa raiz
+
+O Oracle UCP possui o recurso **Application Continuity (AC)** habilitado por padrao. Esse recurso tenta fazer replay de operacoes JDBC em caso de falha. O problema ocorre especificamente em queries SELECT sem `@Transactional`:
+
+1. A conexao e emprestada do pool (borrow)
+2. O SELECT e executado
+3. A conexao e devolvida ao pool (return), e o UCP chama `endRequest()`
+4. O AC tenta replay do `setNetworkTimeout` **apos** o `endRequest()` → warning ORA-17381
+
+Em operacoes de escrita (INSERT/UPDATE/DELETE), isso nao acontece porque elas rodam dentro de `@Transactional`. O UCP mantem a sessao de replay aberta durante toda a transacao, e o `endRequest()` so e chamado apos o commit, quando tudo ja foi registrado corretamente.
+
+### Solucao
+
+Duas mudancas no `UcpReadTimeoutConfig`:
+
+1. **`postProcessAfterInitialization` → `postProcessBeforeInitialization`** — configura as propriedades **antes** do pool inicializar e criar as conexoes iniciais. Com `postProcessAfterInitialization`, as conexoes ja existiam com AC habilitado e a propriedade nao tinha efeito.
+
+2. **`setConnectionFactoryProperty("oracle.jdbc.enableACSupport", "false")`** em vez de colocar no `setConnectionProperties` — isso garante que a propriedade e setada diretamente no `OracleDataSource` (connection factory), que e quem efetivamente cria as conexoes fisicas com o Oracle. O `setConnectionProperties` seta propriedades no nivel do pool UCP, que pode nao propagar para o driver JDBC.
+
 ## Como Executar
 
 ### Pre-requisitos
